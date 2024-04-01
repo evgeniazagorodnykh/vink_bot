@@ -9,6 +9,8 @@ from settings import settings
 from handlers.basic import get_start
 from handlers.contact import get_fake_contact, get_true_contact
 from filters.is_contact import IsTrueContact
+from utils.commands import set_commands
+from utils.states import StepsForm
 
 
 async def start():
@@ -28,6 +30,7 @@ async def start():
         get_true_contact,
         F.contact,
         IsTrueContact(),
+        StepsForm.PHONE_STATE
     )
     dp.message.register(
         get_fake_contact,
