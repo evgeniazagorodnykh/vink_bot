@@ -1,7 +1,7 @@
 import os
+
 import requests
 from dotenv import load_dotenv
-from environs import Env
 from pprint import pprint
 
 load_dotenv()
@@ -22,8 +22,9 @@ role = (
 )
 question = 'Какие материалы для рекламы сейчас в моде?'
 
-class YandexGPT():
 
+class YandexGPT():
+    """Модель ИИ-консультанта тех.поддержки."""
     def generate(self, message):
         prompt = {
             "modelUri": f"gpt://{FOLDER_ID}/yandexgpt-lite",
