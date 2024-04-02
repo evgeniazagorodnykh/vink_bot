@@ -6,7 +6,7 @@ from chatbot.settings import MAX_CHAR_LENGTH, MAX_DIGIT_LENGTH
 class Conversation(models.Model):
     """Модель диалога."""
     name = models.CharField(max_length=MAX_CHAR_LENGTH, default='User')
-    number = models.CharField(max_length=MAX_DIGIT_LENGTH)
+    phone = models.CharField(max_length=MAX_DIGIT_LENGTH)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     archive = models.BooleanField(default=False)

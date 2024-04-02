@@ -7,10 +7,10 @@ from bot.models import Conversation, Message
 class ConversationAdmin(admin.ModelAdmin):
     """Конфигурация диалога в админке."""
     list_display = (
-        'id', 'name', 'number', 'archive', 'created_at', 'updated_at',
+        'id', 'name', 'phone', 'archive', 'created_at', 'updated_at',
     )
     list_filter = ('created_at', 'updated_at', 'archive',)
-    search_fields = ('name', 'number',)
+    search_fields = ('name', 'phone',)
 
 
 @admin.register(Message)
