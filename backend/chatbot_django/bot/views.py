@@ -17,18 +17,11 @@ class ConversationViewSet(viewsets.ModelViewSet):
     serializer_class = ConversationSerializer
     permission_classes = [AllowAny]
 
-    def create(self, request, *args, **kwargs):
-        data = request.data
-        serializer = ConversationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
+    permission_classes = [AllowAny]
 
     def get_conversation(self):
         conversation_id = self.kwargs.get('conversation_id')
@@ -39,5 +32,5 @@ class MessageViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         conversation = self.get_conversation()
-        return serializer.save(conversation=conversation)
+        serializer.save(conversation=conversation)
 

@@ -6,8 +6,9 @@ from aiogram.types import Message
 from aiogram.filters import Command
 from settings import settings
 
-from handlers.basic import get_start
+from handlers.basic import get_start, question_resolved
 from handlers.contact import get_fake_contact, get_true_contact
+from handlers.question import get_question
 from filters.is_contact import IsTrueContact
 from utils.commands import set_commands
 from utils.states import StepsForm
@@ -35,6 +36,15 @@ async def start():
     dp.message.register(
         get_fake_contact,
         F.contact
+    )
+    dp.message.register(
+        question_resolved,
+        F.text == 'Вопрос решен!',
+        StepsForm.CONVERSATION_STATE,
+    )
+    dp.message.register(
+        get_question,
+        StepsForm.CONVERSATION_STATE
     )
 
     try:

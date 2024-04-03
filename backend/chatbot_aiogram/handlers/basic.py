@@ -17,3 +17,11 @@ async def get_start(message: Message, bot: Bot, state: FSMContext):
     )
 
     await state.set_state(StepsForm.PHONE_STATE)
+
+
+async def question_resolved(message: Message, bot: Bot, state: FSMContext):
+    """Вопрос решен."""
+    await message.answer(
+        'Мы рады, что смогли вам помочь!'
+    )
+    await state.set_state(StepsForm.FINAL_STATE)
