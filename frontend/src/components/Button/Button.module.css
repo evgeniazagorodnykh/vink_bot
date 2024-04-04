@@ -1,0 +1,26 @@
+.button {
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: 66px;
+    height: 66px;
+    border-radius: 50px;
+    /* box-shadow: 5px 5px 5px 5px solid red; */
+    cursor: pointer;
+    transition: opacity 0.2s;
+    border: none;
+    box-shadow: 0 0 10px 10px rgba(218, 204, 125, 0.3);
+}
+
+
+.button:hover {
+    box-shadow: 0 0 10px 10px rgba(103, 96, 60, 0.2);
+}
+
+/* .button:focus,
+.button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+} */
