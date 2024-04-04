@@ -6,6 +6,7 @@ from bot.utils import time_since
 
 class MessageSerializer(serializers.ModelSerializer):
     """Сериализатор для сообщений."""
+    conversation = serializers.PrimaryKeyRelatedField(read_only=True)
 
     class Meta:
         model = Message
