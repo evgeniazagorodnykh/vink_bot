@@ -1,4 +1,5 @@
 import { FC, FormEvent, useState } from 'react'
+import { X } from 'lucide-react'
 import MessageBlock from './Block/MessageBlock'
 import styles from './Chat.module.scss'
 import Form from './Form/Form'
@@ -33,9 +34,10 @@ const mockMessages: IMessage[] = [
 
 type ChatProps = {
 	isOpen: boolean
+	setIsOpen: (arg: boolean) => void
 }
 
-const Chat: FC<ChatProps> = ({ isOpen }) => {
+const Chat: FC<ChatProps> = ({ isOpen, setIsOpen }) => {
 	const [messages, setMessages] = useState<IMessage[]>(mockMessages)
 	const [currentMessage, setCurrentMessage] = useState<string>('')
 	// let socket;
@@ -73,16 +75,22 @@ const Chat: FC<ChatProps> = ({ isOpen }) => {
 	// 	console.log(e.target.value)
 	// }
 
+	function formatTimeUnit(unit: number): string {
+		return unit < 10 ? '0' + unit : unit.toString()
+	}
+
 	function handleSubmit() {
 		// Отправляем текущее сообщение через веб-сокет
 		// socket.send(currentMessage);
-		const date = new Date()
+		const date: Date = new Date()
+		const h: string = formatTimeUnit(date.getHours())
+		const m: string = formatTimeUnit(date.getMinutes())
 
 		const newMessage: IMessage = {
 			id: messages.length + 1,
 			text: currentMessage,
 			user: 'me',
-			time: `${date.getHours()}:${date.getMinutes()}`,
+			time: h + ':' + m,
 		}
 		setMessages([...messages, newMessage])
 		setCurrentMessage('')
@@ -97,6 +105,12 @@ const Chat: FC<ChatProps> = ({ isOpen }) => {
 		<div className={`${styles.chat} ${isOpen ? styles.open : ''}`}>
 			<div className={styles.chat__header}>
 				<h3>Чат с поддержкой:</h3>
+				<X
+					className={styles.icon}
+					onClick={() => setIsOpen(false)}
+					size={24}
+					color={'#37383a'}
+				/>
 			</div>
 			<MessageBlock messages={messages} />
 			<Form

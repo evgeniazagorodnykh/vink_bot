@@ -21,22 +21,30 @@ const Form: FC<FormProps> = ({
 
 	function handleKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
 		if (e.key === 'Enter' && !e.shiftKey) {
-			e.preventDefault()
-			handleSubmit()
+			if (currentMessage.trim() !== '') {
+				e.preventDefault()
+				handleSubmit()
+			}
 		}
 	}
 	return (
 		<div className={styles.form}>
 			<form onSubmit={handleMessageSubmit}>
 				<textarea
+					minLength={2}
+					maxLength={100}
 					value={currentMessage}
 					onChange={onChangeHandler}
 					className={styles.form__input}
 					placeholder='Введите сообщение'
 					onKeyDown={handleKeyDown}
 				/>
-				<button type='submit'>
-					<ArrowUp size={24} color={'#37383a'} />
+				<button disabled={currentMessage.trim() === ''} type='submit'>
+					<ArrowUp
+						className={currentMessage.trim() !== '' ? styles.icon : ''}
+						size={24}
+						color={currentMessage.trim() !== '' ? '#37383a' : '#e5e5e5'}
+					/>
 				</button>
 			</form>
 		</div>

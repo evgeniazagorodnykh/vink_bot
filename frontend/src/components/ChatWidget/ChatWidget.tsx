@@ -1,5 +1,5 @@
 import React, { FC, useMemo, useState } from 'react'
-import { createRoot } from 'react-dom/client';
+import { createRoot } from 'react-dom/client'
 
 import message from '../../assets/images/chat.svg'
 import cross from '../../assets/images/cross2.svg'
@@ -12,8 +12,14 @@ import style from './ChatWidget.module.css'
 interface ChatWidgetProps {
 	className?: string
 	styles?: any
+	setIsOpenChat: (arg: boolean) => void
 }
-export const ChatWidget: FC<ChatWidgetProps> = ({ className, styles }) => {
+
+export const ChatWidget: FC<ChatWidgetProps> = ({
+	className,
+	styles,
+	setIsOpenChat,
+}) => {
 	const [menuState, setMenuState] = useState(false)
 
 	const items = useMemo(
@@ -36,12 +42,12 @@ export const ChatWidget: FC<ChatWidgetProps> = ({ className, styles }) => {
 					<img src={whatsapp} alt='message' className={style.icon} />
 				</Button>
 			</a>,
-			<a
-				href='https://t.me/lia_jul_07'
-				target='_blank'
-				rel='noopener noreferrer'
-			>
-				<Button className={style.chat} key={2}>
+			<a href='#' rel='noopener noreferrer'>
+				<Button
+					onClick={() => setIsOpenChat(true)}
+					className={style.chat}
+					key={2}
+				>
 					<img src={message} alt='message' className='' />
 				</Button>
 			</a>,
@@ -74,12 +80,17 @@ export const ChatWidget: FC<ChatWidgetProps> = ({ className, styles }) => {
 	)
 }
 
-export function ChatWidgetConstructor({ element, className, styles }: { element: string, className?: string, styles?: any }) {
-    const root = createRoot(document.getElementById(element) as HTMLElement);
-    root.render(
-        React.createElement(ChatWidget, { className, styles })
-    );
+export function ChatWidgetConstructor({
+	element,
+	className,
+	styles,
+}: {
+	element: string
+	className?: string
+	styles?: any
+}) {
+	const root = createRoot(document.getElementById(element) as HTMLElement)
+	root.render(React.createElement(ChatWidget, { className, styles }))
 }
 
-export default ChatWidget;
-
+export default ChatWidget
