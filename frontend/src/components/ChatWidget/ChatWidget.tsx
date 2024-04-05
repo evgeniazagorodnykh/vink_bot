@@ -1,4 +1,6 @@
-import { FC, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
+import { createRoot } from 'react-dom/client';
+
 import message from '../../assets/images/chat.svg'
 import cross from '../../assets/images/cross2.svg'
 import telegram from '../../assets/images/telegram.svg'
@@ -72,4 +74,12 @@ export const ChatWidget: FC<ChatWidgetProps> = ({ className, styles }) => {
 	)
 }
 
-export default ChatWidget
+export function ChatWidgetConstructor({ element, className, styles }: { element: string, className?: string, styles?: any }) {
+    const root = createRoot(document.getElementById(element) as HTMLElement);
+    root.render(
+        React.createElement(ChatWidget, { className, styles })
+    );
+}
+
+export default ChatWidget;
+
