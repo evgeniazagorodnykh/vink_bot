@@ -3,7 +3,7 @@ import Chat from './components/Chat/Chat'
 import ChatWidget from './components/ChatWidget/ChatWidget'
 
 function App() {
-	const [isOpenChat, setIsOpenChat] = useState<boolean>(true)
+	const [isOpenChat, setIsOpenChat] = useState<boolean>(false)
 	return (
 		<div>
 			{isOpenChat ? (
