@@ -2,15 +2,9 @@ import { FC, FormEvent, useState } from 'react'
 import MessageBlock from './Block/MessageBlock'
 import styles from './Chat.module.scss'
 import Form from './Form/Form'
+import { IMessage } from '../types/types'
 
-interface Message {
-	id: number
-	text: string
-	user: string
-	time: string
-}
-
-const mockMessages: Message[] = [
+const mockMessages: IMessage[] = [
 	{
 		id: 1,
 		text: 'Готовы помочь!',
@@ -25,20 +19,24 @@ const mockMessages: Message[] = [
 	},
 	{
 		id: 11,
-		text: 'Готовы помочь!',
+		text: 'Опишите вашу проблему.',
 		user: 'vink',
 		time: '12:00',
 	},
 	{
 		id: 21,
-		text: 'Мне нужна помощь!',
+		text: 'Моя проблемма...',
 		user: 'me',
 		time: '13:00',
 	},
 ]
 
-const Chat: FC = () => {
-	const [messages, setMessages] = useState<Message[]>(mockMessages)
+type ChatProps = {
+	isOpen: boolean
+}
+
+const Chat: FC<ChatProps> = ({ isOpen }) => {
+	const [messages, setMessages] = useState<IMessage[]>(mockMessages)
 	const [currentMessage, setCurrentMessage] = useState<string>('')
 	// let socket;
 
@@ -80,7 +78,7 @@ const Chat: FC = () => {
 		// socket.send(currentMessage);
 		const date = new Date()
 
-		const newMessage: Message = {
+		const newMessage: IMessage = {
 			id: messages.length + 1,
 			text: currentMessage,
 			user: 'me',
@@ -96,7 +94,7 @@ const Chat: FC = () => {
 	}
 
 	return (
-		<div className={styles.chat}>
+		<div className={`${styles.chat} ${isOpen ? styles.open : ''}`}>
 			<div className={styles.chat__header}>
 				<h3>Чат с поддержкой:</h3>
 			</div>

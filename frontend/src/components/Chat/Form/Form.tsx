@@ -42,5 +42,4 @@ const Form: FC<FormProps> = ({
 		</div>
 	)
 }
-
 export default Form
