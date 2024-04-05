@@ -1,4 +1,5 @@
-import { FC, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
+import { createRoot } from 'react-dom/client';
 import style from './ChatWidget.module.css'
 import ContextMenu from '../ContextMenu/ContextMenu';
 import Button from '../Button/Button'
@@ -56,6 +57,13 @@ export const ChatWidget: FC<ChatWidgetProps> = ({ className, styles }) => {
 
         </div>
     )
+}
+
+export function ChatWidgetConstructor({ element, className, styles }: { element: string, className?: string, styles?: any }) {
+    const root = createRoot(document.getElementById(element) as HTMLElement);
+    root.render(
+        React.createElement(ChatWidget, { className, styles })
+    );
 }
 
 export default ChatWidget;
