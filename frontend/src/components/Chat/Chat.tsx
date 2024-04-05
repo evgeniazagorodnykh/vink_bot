@@ -3,7 +3,7 @@ import { X } from 'lucide-react'
 import MessageBlock from './Block/MessageBlock'
 import styles from './Chat.module.scss'
 import Form from './Form/Form'
-import { IMessage } from '../types/types'
+import { IMessage, ChatProps } from '../types/types'
 
 const mockMessages: IMessage[] = [
 	{
@@ -31,11 +31,6 @@ const mockMessages: IMessage[] = [
 		time: '13:00',
 	},
 ]
-
-type ChatProps = {
-	isOpen: boolean
-	setIsOpen: (arg: boolean) => void
-}
 
 const Chat: FC<ChatProps> = ({ isOpen, setIsOpen }) => {
 	const [messages, setMessages] = useState<IMessage[]>(mockMessages)
