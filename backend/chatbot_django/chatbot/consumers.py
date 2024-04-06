@@ -3,7 +3,7 @@ import json
 from aiogram import Bot, Dispatcher
 from channels.generic.websocket import AsyncWebsocketConsumer
 
-from chatbot_django.chatbot import settings
+from chatbot import settings
 
 
 class AiogramConsumer(AsyncWebsocketConsumer):

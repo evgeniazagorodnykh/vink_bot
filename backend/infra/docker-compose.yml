@@ -14,12 +14,18 @@ services:
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
+    depends_on:
+      - db
     env_file:
       - ../.env
+    container_name: django_team_7
   frontend:
     build: ../chatbot_aiogram
+    depends_on:
+      - backend
     env_file:
       - ../.env
+    container_name: aiogram_team_7
   nginx:
     image: nginx:1.21.3-alpine
     restart: always
