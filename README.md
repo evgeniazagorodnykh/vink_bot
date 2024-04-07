@@ -1,1 +1,0 @@
-# vink_bot

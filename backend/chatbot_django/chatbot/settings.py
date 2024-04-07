@@ -10,33 +10,33 @@ from environs import Env
 load_dotenv()
 
 
-# @dataclass
-# class Bots:
-#     bot_token: str
-#     admin_id: int
+@dataclass
+class Bots:
+    bot_token: str
+    admin_id: int
 
 
-# @dataclass
-# class Settings:
-#    bots: Bots
+@dataclass
+class Settings:
+   bots: Bots
 
 
-# def get_settings(path: str):
-#     env = Env()
-#     env.read_env(path)
+def get_settings(path: str):
+    env = Env()
+    env.read_env(path)
 
-#     return Settings(
-#         bots=Bots(
-#             bot_token=env.str('TOKEN'),
-#             admin_id=env.int('ADMIN_ID'),
-#         )
-#     )
+    return Settings(
+        bots=Bots(
+            bot_token=env.str('TOKEN'),
+            admin_id=env.int('ADMIN_ID'),
+        )
+    )
 
-# django_token = os.getenv('DJANGO_TOKEN')
-# settings = get_settings('.env')
+django_token = os.getenv('DJANGO_TOKEN')
+settings = get_settings('.env')
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 WEB_HOST = os.getenv(
     'WEB_HOST', default='127.0.0.1')
@@ -77,10 +77,11 @@ ROOT_URLCONF = 'chatbot.urls'
 
 CSRF_TRUSTED_ORIGINS = [f"{WEB_PROTOCOL}{WEB_HOST}{WEB_PORT}"]
 
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,27 +94,27 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'chatbot.wsgi.application'
-# ASGI_APPLICATION = 'chatbot.asgi.application'
+# WSGI_APPLICATION = 'chatbot.wsgi.application'
+ASGI_APPLICATION = 'chatbot.asgi.application'
 
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DATABASE_NAME', default='postgres'),
-#         'USER': os.getenv('DATABASE_USERNAME', default='postgres'),
-#         'PASSWORD': os.getenv('DATABASE_PASSWORD', default='postgres'),
-#         'HOST': os.getenv('DATABASE_HOST', default='db'),
-#         'PORT': os.getenv('DATABASE_PORT', default='5432'),
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DATABASE_NAME', default='postgres'),
+        'USER': os.getenv('DATABASE_USERNAME', default='postgres'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', default='postgres'),
+        'HOST': os.getenv('DATABASE_HOST', default='db'),
+        'PORT': os.getenv('DATABASE_PORT', default='5432'),
+    }
+}
 
 
 AUTH_PASSWORD_VALIDATORS = [
