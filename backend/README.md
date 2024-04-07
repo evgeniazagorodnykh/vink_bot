@@ -14,3 +14,4 @@ docker-compose exec backend python manage.py createsuperuser
 docker-compose exec backend python manage.py collectstatic --no-input
 ```
 - Админка доступна по адресу: http://127.0.0.1:81/admin/
+- Документация доступна по адресу: http://127.0.0.1:81/docs/
