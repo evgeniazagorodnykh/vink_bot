@@ -1,3 +1,5 @@
+import logging
+
 from aiogram import Bot
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message
@@ -5,6 +7,13 @@ from aiogram.types import Message
 from utils.states import StepsForm
 from handlers.api import post_message
 from keyboards.reply import final_kbd
+from handlers.gpt import YandexGPT
+
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s [%(levelname)s] %(message)s'
+)
 
 
 async def get_question(
@@ -17,9 +26,9 @@ async def get_question(
     data_dict['content'] = message.text
 
     answer = await post_message(data_dict, context_data['conversation_id'])
-    # отправка вопроса gpt и получение ответа
+    gpt = YandexGPT()
+    gpt_answer = gpt.generate(answer)
     await message.answer(
-        'Ответ gpt',
+        gpt_answer,
         reply_markup=final_kbd()
     )
-
