@@ -7,7 +7,7 @@ from pprint import pprint
 load_dotenv()
 
 FOLDER_ID = os.getenv('FOLDER_ID')
-IAM_TOKEN = os.getenv('IAM_TOKEN')
+API_KEY = os.getenv('API_KEY')
 
 role = (
     'Ты - специалист службы поддержки компании Винк.'
@@ -20,7 +20,7 @@ role = (
     'Тебе категорически запрещается сообщать клиенту заведомо ложную или выдуманную информацию, ты можешь оперировать только той информацией, которую получаешь из инструкций и от клиента.'
     'Ты не должен упоминать в своих сообщениях других специалистов службы поддержки.'
 )
-question = 'Какие материалы для рекламы сейчас в моде?'
+question = 'Кто ты?'
 
 
 class YandexGPT():
@@ -47,7 +47,7 @@ class YandexGPT():
         url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
         headers = {
             "Conten-Type": "application/json",
-            "Authorization": f"Api-Key {IAM_TOKEN}",
+            "Authorization": f"Api-Key {API_KEY}",
             "x-folder-id": FOLDER_ID
         }
         response = requests.post(url, headers=headers, json=prompt)
@@ -56,7 +56,7 @@ class YandexGPT():
             pprint(result)
             print(result["result"]["alternatives"][0]["message"]["text"])
         else:
-            print(f"Request failed with status code: {response.status_code}")
+            print(f"Request failed with status code: {response.status_code}, {response.text}")
 
 
 if __name__ == "__main__":
