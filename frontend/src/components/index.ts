@@ -1,0 +1,1 @@
+export { default as ChatWidget, ChatWidgetConstructor } from './ChatWidget/ChatWidget'
