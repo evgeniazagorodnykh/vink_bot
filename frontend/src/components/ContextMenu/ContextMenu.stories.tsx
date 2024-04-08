@@ -3,7 +3,7 @@ import message from '../../assets/images/chat.svg'
 import telegram from '../../assets/images/telegram.svg'
 import whatsapp from '../../assets/images/whatsapp.svg'
 import Button from '../Button/Button.tsx'
-import style from '../ChatWidget/ChatWidget.module.css'
+import style from '../ChatWidget/ChatWidget.module.scss'
 import ContextMenu from './ContextMenu'
 
 const meta = {

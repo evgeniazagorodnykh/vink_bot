@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import ChatWidget from './ChatWidget'
-import style from './ChatWidget.module.css'
-import { FC } from 'react'
+import style from './ChatWidget.module.scss'
+
 
 const StorybookWrapper: FC = () => {
     return (
@@ -25,6 +26,5 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-
     }
 }
