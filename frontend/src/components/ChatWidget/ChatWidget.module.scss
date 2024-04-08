@@ -1,3 +1,6 @@
+@import '../../style/mixins.scss';
+
+
 .storybook {
     width: 900px;
     height: 400px;
@@ -10,6 +13,10 @@
     position: fixed;
     bottom: 50px;
     right: 50px;
+
+    @include small {
+        display: none;
+    }
 }
 
 .icon {

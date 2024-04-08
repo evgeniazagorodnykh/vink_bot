@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Button from './Button'
-import style from './Button.module.css'
+import style from './Button.module.scss'
 
 const meta = {
     title: 'chatOpen/Button',
