@@ -1,16 +1,12 @@
 import { ButtonHTMLAttributes, FC } from 'react'
-import style from './Button.module.css'
+import style from './Button.module.scss'
 
-// export enum ButtonSize {
-//     SMALL = 'small',
-//     BIG = 'big'
-// }
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     className?: string
 
 }
-export const Button: FC<ButtonProps> = ({ children, className, ...props }) => {
+export const Button: FC<IButtonProps> = ({ children, className, ...props }) => {
     return (
         <button
             type="button"

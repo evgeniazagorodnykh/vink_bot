@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren, ReactNode } from 'react'
-import style from './ContextMenu.module.css'
+import style from './ContextMenu.module.scss'
 
 interface ContextMenuProps {
 	isOpened: boolean
