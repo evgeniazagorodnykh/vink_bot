@@ -20,6 +20,7 @@ async def get_true_contact(
     await state.set_state(StepsForm.CONVERSATION_STATE)
     await state.update_data(conversation_id=answer['id'])
 
+
 async def get_fake_contact(message: Message, bot: Bot, state: FSMContext):
     """Если телефон указан неправильно, то в чат вернется ошибка."""
     await message.answer('Вы отправили не свой номер телефона!')
