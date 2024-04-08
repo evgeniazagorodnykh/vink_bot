@@ -6,6 +6,7 @@ import path from 'path'
 export default ({ mode }: { mode: any }) => {
   const env = loadEnv(mode, process.cwd(), "");
   return defineConfig({
+    base: '/vink_bot/',
     define: {
       "process.env": env,
     },

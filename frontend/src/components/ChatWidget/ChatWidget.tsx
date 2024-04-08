@@ -8,20 +8,21 @@ import whatsapp from '../../assets/images/whatsapp.svg'
 import Button from '../Button/Button'
 import ContextMenu from '../ContextMenu/ContextMenu'
 import style from './ChatWidget.module.scss'
+import Chat from '../Chat/Chat'
 
 
 interface IChatWidgetProps {
 	className?: string
 	styles?: any
-	setIsOpenChat: (arg: boolean) => void
+	// setIsOpenChat: (arg: boolean) => void
 }
 
 export const ChatWidget: FC<IChatWidgetProps> = ({
 	className,
 	styles,
-	setIsOpenChat,
 }) => {
 	const [menuState, setMenuState] = useState(false)
+	const [isOpenChat, setIsOpenChat] = useState<boolean>(false)
 
 	const items = useMemo(
 		() => [
@@ -47,15 +48,20 @@ export const ChatWidget: FC<IChatWidgetProps> = ({
 			</a>,
 			<a href='#' rel='noopener noreferrer' key={2}>
 				<Button
-					onClick={() => setIsOpenChat(true)}
+					onClick={openChatHandler}
 					className={style.chat}
 				>
-					<img src={message} alt='message' className='' />
+					<img src={message} alt='message' />
 				</Button>
 			</a>,
 		],
 		[],
 	)
+
+	function openChatHandler() {
+		setIsOpenChat(true)
+		setMenuState(false)
+	}
 
 	function openContextMenu() {
 		if (menuState === true) {
@@ -66,18 +72,25 @@ export const ChatWidget: FC<IChatWidgetProps> = ({
 	}
 
 	return (
-		<div className={`${style.container} ${className}`} style={styles}>
-			<ContextMenu items={items} isOpened={menuState}>
-				{(menuState && (
-					<Button className={style.cross} onClick={openContextMenu}>
-						<img src={cross} alt='message' className={style.iconCross} />
-					</Button>
-				)) || (
-						<Button className={style.button} onClick={openContextMenu}>
-							<img src={message} alt='cross' className={style.message} />
-						</Button>
-					)}
-			</ContextMenu>
+		<div>
+			{
+				isOpenChat
+				&& <Chat isOpen={isOpenChat} setIsOpen={setIsOpenChat} />
+				||
+				<div className={`${style.container} ${className}`} style={styles}>
+					<ContextMenu items={items} isOpened={menuState}>
+						{(menuState && (
+							<Button className={style.cross} onClick={openContextMenu}>
+								<img src={cross} alt='message' className={style.iconCross} />
+							</Button>
+						)) || (
+								<Button className={style.button} onClick={openContextMenu}>
+									<img src={message} alt='cross' className={style.message} />
+								</Button>
+							)}
+					</ContextMenu>
+				</div>
+			}
 		</div>
 	)
 }
@@ -92,7 +105,7 @@ export function ChatWidgetConstructor({
 	styles?: any
 }) {
 	const root = createRoot(document.getElementById(element) as HTMLElement)
-	root.render(React.createElement(ChatWidget, { className, styles, setIsOpenChat: (() => { }) }))
+	root.render(React.createElement(ChatWidget, { className, styles }))
 }
 
 export default ChatWidget
