@@ -48,6 +48,7 @@ class YandexGPT():
         headers = {
             "Conten-Type": "application/json",
             "Authorization": f"Api-Key {API_KEY}",
+            "Authorization": f"Api-Key {API_KEY}",
             "x-folder-id": FOLDER_ID
         }
         response = requests.post(url, headers=headers, json=prompt)
