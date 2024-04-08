@@ -2,11 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import Chat from './Chat'
 import styles from './Chat.module.scss'
 import { FC } from 'react'
+import { ChatProps } from '../types/types'
 
-const StorybookWrapper: FC = () => {
+const StorybookWrapper: FC<ChatProps> = ({ isOpen, setIsOpen }) => {
     return (
         <div className={styles.storybook}>
-            <Chat />
+            <Chat isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
     )
 }
@@ -25,9 +26,8 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        id: 1,
-        text: 'Готовы помочь!',
-        user: 'vink',
-        time: '12:00',
+        isOpen: true,
+        setIsOpen: () => { }
     }
 }
+
