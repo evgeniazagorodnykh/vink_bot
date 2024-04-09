@@ -50,7 +50,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,7 +75,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'chatbot.urls'
 
-CSRF_TRUSTED_ORIGINS = [f"{WEB_PROTOCOL}{WEB_HOST}{WEB_PORT}"]
+# CSRF_TRUSTED_ORIGINS = [f"{WEB_PROTOCOL}{WEB_HOST}{WEB_PORT}"]
+CSRF_TRUSTED_ORIGINS = ["http://94.241.139.6"]
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
